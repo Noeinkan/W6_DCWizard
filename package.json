@@ -1,0 +1,29 @@
+{
+  "name": "capsar-doc-controller",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Standalone ACC document compliance worker; consumes Capsar integration API.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "vitest run",
+    "dev:client": "vite --config client/vite.config.js",
+    "build:client": "vite build --config client/vite.config.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "supertest": "^7.0.0",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  }
+}
