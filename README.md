@@ -9,14 +9,20 @@ Node service that:
 ## Setup
 
 ```bash
-cd doc-controller
 cp .env.example .env
 npm install
 ```
 
+- Set `LOCAL_ENCRYPTION_KEY` in `.env` to a real secret before storing credentials.
 - In **Capsar**, create an integration key: `POST /api/projects/:id/integration/doc-controller-keys` (JWT), then store the returned `plainKey`.
 - Run API: `npm run dev` (port **3020** by default).
 - Optional dashboard: `npm run dev:client` (Vite on **5173**, proxies `/api` to 3020).
+
+## Local verification
+
+- Health check: `GET http://localhost:3020/api/health`
+- Tests: `npm test`
+- Manual smoke test requires a reachable Capsar instance plus valid APS and ACC credentials.
 
 ## Create a connection
 
@@ -44,4 +50,6 @@ If `DOC_CONTROLLER_API_KEY` is set in `.env`, send header `X-Doc-Controller-Api-
 
 ## Related docs
 
-See [docs/DOC_CONTROLLER_CUTOVER.md](../docs/DOC_CONTROLLER_CUTOVER.md) in the Capsar repo for coexistence with in-app DC Manager.
+- `DOC_CONTROLLER_CUTOVER.md` in this repo summarizes coexistence and user cutover.
+- `EXTRACT_DOC_CONTROLLER.md` in this repo records the completed extraction from the Capsar monorepo.
+- The integration contract and integration-key endpoints remain owned by the Capsar repo.
