@@ -8,6 +8,7 @@
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
     "test": "vitest run",
+    "smoke-test": "node scripts/smoke-test.js",
     "dev:client": "vite --config client/vite.config.js",
     "build:client": "vite build --config client/vite.config.js"
   },

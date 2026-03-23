@@ -21,8 +21,19 @@ npm install
 ## Local verification
 
 - Health check: `GET http://localhost:3020/api/health`
+- Smoke test: `npm run smoke-test`
+- Smoke test with DB check: `npm run smoke-test -- --check-connections`
 - Tests: `npm test`
-- Manual smoke test requires a reachable Capsar instance plus valid APS and ACC credentials.
+- Full end-to-end scan still requires a reachable Capsar instance plus valid APS and ACC credentials.
+
+### No-live-APS local flow
+
+- Start Capsar on port `3001` and this service on port `3020`.
+- In Capsar, create a test project, publish a BEP draft with naming convention fields, and optionally approve a MIDP.
+- Generate an integration key via `POST /api/projects/:id/integration/doc-controller-keys` in Capsar using JWT auth.
+- In this service, call `POST /api/connections` with the Capsar base URL, project ID, integration key, and dummy APS values. Connection creation should succeed and persist the current Capsar snapshot ETag locally.
+- Without real APS credentials, `POST /api/connections/:id/scan` is expected to fail during Autodesk auth. No code changes are needed once valid APS credentials are available.
+- Set `DOC_CONTROLLER_BASE_URL` to target a non-default host/port. If `DOC_CONTROLLER_API_KEY` is enabled on the service, export that value before running the smoke test. Use `DOC_CONTROLLER_SMOKE_CHECK_CONNECTIONS=1` or `--check-connections` to include the DB accessibility check.
 
 ## Create a connection
 
